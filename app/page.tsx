@@ -2,34 +2,38 @@ import Image from 'next/image';
 import niebieska_rybka from '@/public/niebieska_rybka.png';
 import glon from '@/public/glon.png';
 import ground from '@/public/ground.svg';
+import AIRybka from '@/public/Hotpot.png'
 
 export default function Home() {
     return (
         <div className="flex justify-center align-center h-screen">
             <div className="relative top-1/2 translate-y-[-50%] flex flex-col justify-center bg-blue-400
             basis-1/2 min-h-[500px] max-h-[600px] mx-5 rounded-[40px] p-[50px] overflow-hidden">
-                <div className="absolute bottom-0 left-0 right-0">
-                    <Image
-                        src={ground}
-                        alt="Ground"
-                        width={1000}
-                        height={50}
-                    />
-                </div>
-                <div className="absolute bottom-0">
-                    <Image src={glon}
-                           alt="Glon"
-                           width={350}
-                           height={350}
-                    />
-                </div>
-                <div className="absolute left-1/3">
-                    <Image
-                    src={niebieska_rybka}
-                    alt="Niebieska rybka"
-                    height={300}
-                    width={400}
-                    />
+                {/*<div className="absolute bottom-0 left-0 right-0">*/}
+                {/*    <Image*/}
+                {/*        src={ground}*/}
+                {/*        alt="Ground"*/}
+                {/*        width={1000}*/}
+                {/*        height={50}*/}
+                {/*    />*/}
+                {/*</div>*/}
+                {/*<div className="absolute bottom-0">*/}
+                {/*    <Image src={glon}*/}
+                {/*           alt="Glon"*/}
+                {/*           width={350}*/}
+                {/*           height={350}*/}
+                {/*    />*/}
+                {/*</div>*/}
+                {/*<div className="absolute left-1/3">*/}
+                {/*    <Image*/}
+                {/*    src={niebieska_rybka}*/}
+                {/*    alt="Niebieska rybka"*/}
+                {/*    height={300}*/}
+                {/*    width={400}*/}
+                {/*    />*/}
+                {/*</div>*/}
+                <div className="absolute bottom-0 left-0">
+                    <Image src={AIRybka} alt="AI Rybka" width={1000} />
                 </div>
             </div>
             <div className="flex flex-col justify-center text-center px-5 basis-1/2 text-2xl my-auto">

@@ -22,7 +22,7 @@ export default function Login() {
     return (
         <div className='flex flex-col min-h-screen items-center justify-center'>
             <div className="p-10 flex flex-col items-center rounded-2xl bg-white">
-                <Image src={rybka} alt='Rybka logo' width={400} height={500}/>
+                <Image src={rybka} alt='Rybka logo' width={400}/>
                 <input type="text" placeholder='Email' name="email" value={input.email}
                        onChange={onInputChange}
                        className='border-b-2 border-b-gray-400 pl-1 my-1
@@ -35,12 +35,12 @@ export default function Login() {
                         className='w-fit my-1 mt-2 py-2 px-3 rounded-lg bg-blue-600 text-lg
                         hover:bg-lightBlue hover:border-transparent
                         transition-all duration-300'>
-                    Login
+                    Register
                 </button>
                 <p className="text-black mt-10">
-                    Don't have an account yet?
-                    <a href="/register" className="ml-1 text-blue-600">
-                        Register Here
+                    Have an account already?
+                    <a href="/login" className="ml-1 text-blue-600">
+                        Login Here
                     </a>
                 </p>
             </div>
