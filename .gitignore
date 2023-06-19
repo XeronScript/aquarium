@@ -36,3 +36,7 @@ next-env.d.ts
 
 #jetbrains
 .idea
+
+#pocketbase
+pb_data
+pb_migrations
