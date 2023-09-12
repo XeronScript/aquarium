@@ -15,7 +15,7 @@ export default function Navbar() {
     if (user.id.length > 0) {
         rightNavBar = (
             <div>
-                <a href={`/profile`} className="px-4">Profil</a>
+                <a href={`/profile/${user.id}`} className="px-4">Profil</a>
                 <a href="#" className="px-4" onClick={logout}>Wyloguj</a>
             </div>
         )
@@ -27,7 +27,7 @@ export default function Navbar() {
             <div className="flex items-center">
                 <Link href="/" className="px-4">Strona Główna</Link>
                 <Link href="/katalog_ryb" className="px-4">Katalog Ryb</Link>
-                <Link href="/akcesoria" className="px-4">Akcesoria</Link>
+                <Link href="/accessories" className="px-4">Akcesoria</Link>
             </div>
             {rightNavBar}
         </nav>

@@ -3,7 +3,7 @@ import React from "react";
 
 export default function AboutUs() {
     return (
-        <div className="flex flex-col min-h-screen px-16 items-center justify-center text-md">
+        <div className="flex flex-col min-h-screen px-16 items-center justify-center text-md text-black">
             <p className="text-4xl">O nas</p>
             <br/>
 

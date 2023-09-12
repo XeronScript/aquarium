@@ -13,8 +13,8 @@ export default function FishCard(props: FishResponse) {
             <br/>
             <p>Wielkość rybki: {props.size}cm</p>
             <p>Minimalna pojemność akwarium: {props.aquarium_capacity}l</p>
-            <p>Minimalna temeratura: {props.water_temperature}*C</p>
-            <p>Minimalna twardośc wody: {props.water_toughness}*dGH</p>
+            <p>Minimalna temeratura: {props.water_temperature}°C</p>
+            <p>Minimalna twardośc wody: {props.water_toughness}°dGH</p>
         </div>
     );
 }
