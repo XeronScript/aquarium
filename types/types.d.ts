@@ -32,6 +32,32 @@ type Accessory = {
     id: string
     image: string
     name: string
-    price: number
     updated: string
+}
+
+type User = {
+    avatarUrl: string,
+    collectionId: string,
+    collectionName: string,
+    email: string,
+    id: string,
+    username: string,
+}
+
+type authContextType = {
+    user: User,
+    login: (auth: Record) => void,
+    logout: () => void
+}
+
+type Props = {
+    children: ReactNode
+}
+
+type PocketBaseResponse = {
+    page: number,
+    petPage: number,
+    totalItems: number,
+    totalPages: number,
+    items: Array<Accessory>
 }

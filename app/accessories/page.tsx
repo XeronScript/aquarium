@@ -3,13 +3,6 @@ import FishCard from "@/components/FishCard";
 import {PacmanLoader} from "react-spinners";
 import AccessoryCard from "@/components/AccessoryCard";
 
-type PocketBaseResponse = {
-    page: number,
-    petPage: number,
-    totalItems: number,
-    totalPages: number,
-    items: Array<Accessory>
-}
 
 async function getAllRecords(): Promise<PocketBaseResponse> {
     const res = await fetch('http://127.0.0.1:8090/api/collections/accessories/records?perPage=10')
