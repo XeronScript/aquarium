@@ -2,9 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-import {useAuth} from "@/app/AuthContext";
+import { useAuth } from "@/app/AuthContext";
 
-export default function UserProfile({ params }: { params: {ip: string}}) {
+export default function UserProfile({ params }: { params: {ip: string} }) {
     const { user } = useAuth()
 
     console.log(params)

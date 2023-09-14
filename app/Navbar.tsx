@@ -2,21 +2,19 @@
 
 import React from 'react'
 import Link from 'next/link';
-import {useAuth} from "@/app/AuthContext";
+import { useAuth } from "@/app/AuthContext";
 
 export default function Navbar() {
-    const {user, logout} = useAuth()
-
-    // TODO przy wylogowaniu wyjść do strony głównej
+    const { user, logout } = useAuth()
 
     let rightNavBar = (
-        <a href="/login" className="px-4">Zaloguj</a>
+        <Link href="/login" className="px-4">Zaloguj</Link>
     )
     if (user.id.length > 0) {
         rightNavBar = (
             <div>
-                <a href={`/profile/${user.id}`} className="px-4">Profil</a>
-                <a href="#" className="px-4" onClick={logout}>Wyloguj</a>
+                <Link href={`/profile/${user.id}`} className="px-4">Profil</Link>
+                <Link href="/" className="px-4" onClick={logout}>Wyloguj</Link>
             </div>
         )
     }

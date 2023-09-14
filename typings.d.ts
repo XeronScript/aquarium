@@ -1,4 +1,4 @@
-type Fish = {
+export type Fish = {
     image: string,
     name: string,
     price: number,
@@ -9,7 +9,7 @@ type Fish = {
     collection_id: string
 }
 
-type FishResponse = {
+export type FishResponse = {
     aquarium_capacity: number
     collectionId: string
     collectionName: string
@@ -24,7 +24,7 @@ type FishResponse = {
     water_toughness: number
 }
 
-type Accessory = {
+export type Accessory = {
     collectionId: string
     collectionName: string
     created: string
@@ -35,7 +35,7 @@ type Accessory = {
     updated: string
 }
 
-type User = {
+export type User = {
     avatarUrl: string,
     collectionId: string,
     collectionName: string,
@@ -44,20 +44,48 @@ type User = {
     username: string,
 }
 
-type authContextType = {
+export type authContextType = {
     user: User,
     login: (auth: Record) => void,
     logout: () => void
 }
 
-type Props = {
+export type Props = {
     children: ReactNode
 }
 
-type PocketBaseResponse = {
+export type PocketBaseAccessoryResponse = {
     page: number,
     petPage: number,
     totalItems: number,
     totalPages: number,
     items: Array<Accessory>
+}
+
+export type PocketBaseFishResponse = {
+    page: number,
+    petPage: number,
+    totalItems: number,
+    totalPages: number,
+    items: Array<FishResponse>
+}
+
+export type User = {
+    avatarUrl: string,
+    collectionId: string,
+    collectionName: string,
+    email: string,
+    id: string,
+    name: string,
+    username: string,
+}
+
+export type authContextType = {
+    user: User,
+    login: (auth: Record) => void,
+    logout: () => void
+}
+
+export type Props = {
+    children: ReactNode
 }

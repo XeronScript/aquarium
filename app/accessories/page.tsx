@@ -1,11 +1,15 @@
 import React, {Suspense} from "react";
-import FishCard from "@/components/FishCard";
 import {PacmanLoader} from "react-spinners";
-import AccessoryCard from "@/components/AccessoryCard";
+import { Accessory, PocketBaseAccessoryResponse } from "@/typings";
+import AccessoryCard from "./AccessoryCard";
 
 
-async function getAllRecords(): Promise<PocketBaseResponse> {
-    const res = await fetch('http://127.0.0.1:8090/api/collections/accessories/records?perPage=10')
+async function getAllRecords(): Promise<PocketBaseAccessoryResponse> {
+    const res = await fetch(
+        'http://127.0.0.1:8090/api/collections/accessories/records?perPage=10', 
+        { cache: "no-cache" }
+    )
+
     if (!res.ok) {
         throw new Error('Failed to fetch data')
     }

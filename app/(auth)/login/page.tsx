@@ -3,16 +3,16 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import rybka from '@/public/aquaurim_logo.png'
-import {loginWithEmailAndPassword} from "@/api/pocketbaseAPI";
-import {FieldValues, useForm} from "react-hook-form";
-import {PacmanLoader} from "react-spinners";
-import {useAuth} from "@/app/AuthContext";
-import {useRouter} from "next/navigation";
+import { loginWithEmailAndPassword } from "@/pocketbaseAPI";
+import { FieldValues, useForm } from "react-hook-form";
+import { PacmanLoader } from "react-spinners";
+import { useAuth } from "@/app/AuthContext";
+import { useRouter } from "next/navigation";
 
 
 export default function Login() {
     const [isLoading, setLoading] = useState(false)
-    const {register, handleSubmit} = useForm()
+    const { register, handleSubmit } = useForm()
     const { login, user } = useAuth()
     const { push } = useRouter()
 
@@ -22,16 +22,18 @@ export default function Login() {
             const auth = await loginWithEmailAndPassword(data.email, data.password)
             console.log(auth)
             login(auth.record)
+            setLoading(false)
             push(`/profile/${auth.record.id}`)
         } catch (e) {
+            setLoading(false)
             console.log('Error in login in.')
         }
-        setLoading(false)
     }
 
     return (
         <div className='flex flex-col min-h-screen items-center justify-center'>
             {isLoading ? <PacmanLoader color="#06d667"/> : null}
+            <div className=''>
             <div className="p-10 flex flex-col items-center rounded-2xl bg-white">
                 <Image src={rybka} alt='Rybka logo' width={400}/>
                 <form className={`flex flex-col items-center`} onSubmit={handleSubmit(onSubmit)}>
@@ -54,6 +56,7 @@ export default function Login() {
                         Register Here
                     </a>
                 </p>
+            </div>
             </div>
         </div>
     )

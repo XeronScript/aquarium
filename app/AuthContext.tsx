@@ -1,23 +1,9 @@
 'use client'
 
-import React, {createContext, ReactNode, useContext, useState} from "react";
-import {Record} from "pocketbase";
+import React, { createContext, useContext, useState } from "react";
+import { Record } from "pocketbase";
+import { Props, authContextType, User } from "@/typings";
 
-type User = {
-    avatarUrl: string,
-    collectionId: string,
-    collectionName: string,
-    email: string,
-    id: string,
-    name: string,
-    username: string,
-}
-
-type authContextType = {
-    user: User,
-    login: (auth: Record) => void,
-    logout: () => void
-}
 
 const authContextDefaultValues: authContextType = {
     user: {
@@ -26,7 +12,6 @@ const authContextDefaultValues: authContextType = {
         collectionName: "",
         email: "",
         id: "",
-        name: "",
         username: "",
     },
     login: (auth) => {},
@@ -37,10 +22,6 @@ const AuthContext = createContext<authContextType>(authContextDefaultValues)
 
 export function useAuth() {
     return useContext(AuthContext)
-}
-
-type Props = {
-    children: ReactNode
 }
 
 export function AuthProvider({ children }: Props) {
@@ -54,7 +35,6 @@ export function AuthProvider({ children }: Props) {
             collectionId: auth.collectionId,
             email: auth.email,
             id: auth.id,
-            name: auth.name,
             username: auth.username,
         })
     }
@@ -66,7 +46,6 @@ export function AuthProvider({ children }: Props) {
             collectionId: "",
             email: "",
             id: "",
-            name: "",
             username: "",
         })
     }
