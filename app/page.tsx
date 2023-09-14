@@ -1,7 +1,4 @@
-import Image from 'next/image';
-import niebieska_rybka from '@/public/niebieska_rybka.png';
-import glon from '@/public/glon.png';
-import ground from '@/public/ground.svg';
+import Image from 'next/image'
 import AIRybka from '@/public/Hotpot.png'
 
 export default function Home() {

@@ -6,24 +6,23 @@ import rybka from '@/public/aquaurim_logo.png'
 import { loginWithEmailAndPassword } from "@/pocketbaseAPI";
 import { FieldValues, useForm } from "react-hook-form";
 import { PacmanLoader } from "react-spinners";
-import { useAuth } from "@/app/AuthContext";
 import { useRouter } from "next/navigation";
+import { usePocket } from '@/app/AuthContext';
 
 
 export default function Login() {
-    const [isLoading, setLoading] = useState(false)
+    const [ isLoading, setLoading ] = useState(false)
     const { register, handleSubmit } = useForm()
-    const { login, user } = useAuth()
+    const { login, user } = usePocket()
     const { push } = useRouter()
 
     async function onSubmit(data: FieldValues) {
         setLoading(true)
         try {
-            const auth = await loginWithEmailAndPassword(data.email, data.password)
-            console.log(auth)
-            login(auth.record)
+            // const auth = await loginWithEmailAndPassword(data.email, data.password)
+            await login(data.email, data.password)
             setLoading(false)
-            push(`/profile/${auth.record.id}`)
+            push(`/profile/${user.id}`)
         } catch (e) {
             setLoading(false)
             console.log('Error in login in.')
@@ -51,7 +50,7 @@ export default function Login() {
                     </button>
                 </form>
                 <p className="text-black mt-10">
-                    Don't have an account yet?
+                    {"Don't"} have an account yet?
                     <a href="/register" className="ml-1 text-blue-600">
                         Register Here
                     </a>

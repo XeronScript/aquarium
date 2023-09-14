@@ -50,10 +50,6 @@ export type authContextType = {
     logout: () => void
 }
 
-export type Props = {
-    children: ReactNode
-}
-
 export type PocketBaseAccessoryResponse = {
     page: number,
     petPage: number,
@@ -86,6 +82,3 @@ export type authContextType = {
     logout: () => void
 }
 
-export type Props = {
-    children: ReactNode
-}

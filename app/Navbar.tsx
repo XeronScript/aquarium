@@ -2,15 +2,15 @@
 
 import React from 'react'
 import Link from 'next/link';
-import { useAuth } from "@/app/AuthContext";
+import { usePocket } from "@/app/AuthContext";
 
 export default function Navbar() {
-    const { user, logout } = useAuth()
+    const { user, logout } = usePocket()
 
     let rightNavBar = (
         <Link href="/login" className="px-4">Zaloguj</Link>
     )
-    if (user.id.length > 0) {
+    if (user) {
         rightNavBar = (
             <div>
                 <Link href={`/profile/${user.id}`} className="px-4">Profil</Link>

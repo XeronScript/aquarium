@@ -1,66 +1,83 @@
 'use client'
 
-import React, { createContext, useContext, useState } from "react";
-import { Record } from "pocketbase";
-import { Props, authContextType, User } from "@/typings";
+import {
+    createContext,
+    useContext,
+    useCallback,
+    useState,
+    useEffect,
+    useMemo,
+    ReactNode
+} from "react"
+import PocketBase, { RecordAuthResponse, Record } from "pocketbase"
+import { useInterval } from "usehooks-ts"
+import jwtDecode, { JwtPayload } from "jwt-decode"
+import ms from "ms"
 
 
-const authContextDefaultValues: authContextType = {
-    user: {
-        avatarUrl: "",
-        collectionId: "",
-        collectionName: "",
-        email: "",
-        id: "",
-        username: "",
-    },
-    login: (auth) => {},
-    logout: () => {}
+const BASE_URL = "http://127.0.0.1:8090"
+const fiveMinutes = ms("5 minutes")
+const twoMinutes = ms("2 minutes")
+
+const PocketContext = createContext({})
+
+export const usePocket = () => useContext(PocketContext) as any
+
+export type Props = {
+    children: ReactNode
 }
 
-const AuthContext = createContext<authContextType>(authContextDefaultValues)
+export function PocketProvider({ children }: Props) {
+    const pb = useMemo(() => new PocketBase(BASE_URL), [])
 
-export function useAuth() {
-    return useContext(AuthContext)
-}
+    const [ user, setUser ] = useState(pb.authStore.model)
+    const [ token, setToken ] = useState(pb.authStore.token)
 
-export function AuthProvider({ children }: Props) {
-    const [ user, setUser ] = useState<User>(authContextDefaultValues.user);
-
-    // @ts-ignore
-    const login = (auth: Record) => {
-        setUser({
-            avatarUrl: auth.avatar,
-            collectionName: auth.collectionName,
-            collectionId: auth.collectionId,
-            email: auth.email,
-            id: auth.id,
-            username: auth.username,
+    useEffect(() => {
+        return pb.authStore.onChange((token, model) => {
+            setToken(token)
+            setUser(model)
         })
-    }
+    }, [])
 
-    const logout = () => {
-        setUser({
-            avatarUrl: "",
-            collectionName: "",
-            collectionId: "",
-            email: "",
-            id: "",
-            username: "",
-        })
-    }
+    const register = useCallback(async (email: string, password: string) => {
+        return await pb
+        .collection("users")
+        .create({ email, password, passwordConfirm: password })
+    }, [])
+
+    const login = useCallback(async (email: string, password: string) => {
+        return await pb.collection("users").authWithPassword(email, password)
+    }, [])
+
+    const logout = useCallback(() => {
+        pb.authStore.clear()
+    }, [])
+
+    const refreshSession = useCallback(async () => {
+        if (!pb.authStore.isValid || !token) return;
+        const decoded = jwtDecode<JwtPayload>(token)
+        const tokenExpiration = decoded.exp!
+        const expirationWithBuffer = (decoded.exp! + fiveMinutes) / 1000
+        if (tokenExpiration < expirationWithBuffer) {
+            await pb.collection("users").authRefresh()
+        }
+    }, [token])
+
+    useInterval(refreshSession, token ? twoMinutes : null)
 
     const value = {
-        user,
+        register,
         login,
-        logout
+        logout,
+        user,
+        token,
+        pb
     }
 
     return (
-        <>
-            <AuthContext.Provider value={value} >
-                {children}
-            </AuthContext.Provider>
-        </>
+        <PocketContext.Provider value={value}>
+            { children }
+        </PocketContext.Provider>
     )
 }
