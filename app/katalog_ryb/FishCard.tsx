@@ -4,18 +4,56 @@ import { FishResponse } from "@/typings";
 
 export default function FishCard(props: FishResponse) {
     return (
-        <div className="flex flex-col flex-wrap items-center overflow-hidden
-        m-10 min-w-[400px] min-h-[500px] rounded-2xl bg-white text-black drop-shadow-lg">
+        <div className="flex flex-col items-center overflow-clip
+        m-10 max-w-2xl rounded-lg bg-white text-black text-sm drop-shadow-lg">
             <Image src={`http://127.0.0.1:8090/api/files/${props.collectionId}/${props.id}/${props.image}`}
                    alt='Rybka.png'
                    width={500}
                    height={200}/>
-            <p className="text-2xl">{props.name}</p>
-            <br/>
-            <p>Wielkość rybki: {props.size}cm</p>
-            <p>Minimalna pojemność akwarium: {props.aquarium_capacity}l</p>
-            <p>Minimalna temeratura: {props.water_temperature}°C</p>
-            <p>Minimalna twardośc wody: {props.water_toughness}°dGH</p>
+            <div className="p-4 truncate... max-w-[500px]">
+                <p className="text-2xl">{props.name}</p>
+                <br/>
+                <p>
+                    <strong>Pochodzenie:{" "}</strong> 
+                    {props.origin}
+                </p>
+                <p>
+                    <strong>Środowisko:{" "}</strong>
+                    {props.environment}
+                </p>
+                <p>
+                    <strong>Rodzina:{" "}</strong>
+                    {props.family}
+                </p>
+                <p>
+                    <strong>Wielkość rybki:{" "}</strong> 
+                    {props.size}
+                </p>
+                <p>
+                    <strong>Zachowanie:{" "}</strong>
+                    {props.behavior}
+                </p>
+                <p>
+                    <strong>Pojemność akwarium:{" "}</strong> 
+                    {props.aquarium_size}
+                </p>
+                <p>
+                    <strong>Temeratura wody:{" "}</strong> 
+                    {props.water_temperature}°C
+                </p>
+                <p>
+                    <strong>Ph wody:{" "}</strong>
+                    {props.water_ph}
+                </p>
+                <p>
+                    <strong>Twardośc wody:{" "}</strong> 
+                    {props.water_toughness}°dGH
+                </p>
+                <p>
+                    <strong>Pożywienie:{" "}</strong>
+                    {props.food}
+                </p>
+            </div>
         </div>
     );
 }

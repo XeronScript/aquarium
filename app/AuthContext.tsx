@@ -7,12 +7,12 @@ import {
     useState,
     useEffect,
     useMemo,
-    ReactNode
 } from "react"
-import PocketBase, { RecordAuthResponse, Record } from "pocketbase"
+import PocketBase from "pocketbase"
 import { useInterval } from "usehooks-ts"
 import jwtDecode, { JwtPayload } from "jwt-decode"
 import ms from "ms"
+import { Props } from "@/typings"
 
 
 const BASE_URL = "http://127.0.0.1:8090"
@@ -22,10 +22,6 @@ const twoMinutes = ms("2 minutes")
 const PocketContext = createContext({})
 
 export const usePocket = () => useContext(PocketContext) as any
-
-export type Props = {
-    children: ReactNode
-}
 
 export function PocketProvider({ children }: Props) {
     const pb = useMemo(() => new PocketBase(BASE_URL), [])
@@ -41,9 +37,15 @@ export function PocketProvider({ children }: Props) {
     }, [])
 
     const register = useCallback(async (email: string, password: string) => {
-        return await pb
-        .collection("users")
-        .create({ email, password, passwordConfirm: password })
+        const id = Math.floor(Math.random() * 99999)
+        const data = {
+            "username": `User${id}`,
+            "email": email,
+            "emailVisibitility": true,
+            "password": password,
+            "passwordConfirm": password,
+        }
+        return await pb.collection("users").create(data)
     }, [])
 
     const login = useCallback(async (email: string, password: string) => {

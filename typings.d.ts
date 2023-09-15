@@ -1,27 +1,21 @@
-export type Fish = {
-    image: string,
-    name: string,
-    price: number,
-    size: number,
-    aquarium_capacity: number,
-    water_temperature: number,
-    water_toughness: number,
-    collection_id: string
-}
-
 export type FishResponse = {
-    aquarium_capacity: number
+    id: string
     collectionId: string
     collectionName: string
     created: string
-    id: string
+    updated: string
     image: string
     name: string
-    price: number
-    size: number
-    updated: string
+    origin: string
+    environment: string
+    family: string
+    size: string
+    behavior: string
+    aquarium_size: number
     water_temperature: number
-    water_toughness: number
+    food: string
+    water_ph: string
+    water_toughness: string
 }
 
 export type Accessory = {
@@ -82,3 +76,6 @@ export type authContextType = {
     logout: () => void
 }
 
+export type Props = {
+    children: ReactNode
+}
