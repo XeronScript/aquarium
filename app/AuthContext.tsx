@@ -12,7 +12,6 @@ import PocketBase from "pocketbase"
 import { useInterval } from "usehooks-ts"
 import jwtDecode, { JwtPayload } from "jwt-decode"
 import ms from "ms"
-import { Props } from "@/typings"
 
 
 const BASE_URL = "http://127.0.0.1:8090"
@@ -22,6 +21,11 @@ const twoMinutes = ms("2 minutes")
 const PocketContext = createContext({})
 
 export const usePocket = () => useContext(PocketContext) as any
+
+
+interface Props {
+    children: React.ReactNode
+}
 
 export function PocketProvider({ children }: Props) {
     const pb = useMemo(() => new PocketBase(BASE_URL), [])

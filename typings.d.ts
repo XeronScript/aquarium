@@ -1,9 +1,10 @@
-export type FishResponse = {
+export type Fish = {
     id: string
     collectionId: string
     collectionName: string
     created: string
     updated: string
+
     image: string
     name: string
     origin: string
@@ -19,63 +20,38 @@ export type FishResponse = {
 }
 
 export type Accessory = {
+    id: string
     collectionId: string
     collectionName: string
     created: string
-    description: string
-    id: string
-    image: string
-    name: string
     updated: string
+
+    name: string
+    description: string
+    image: string
 }
 
-export type User = {
-    avatarUrl: string,
+export type Aquarium = {
+    id: string,
     collectionId: string,
     collectionName: string,
-    email: string,
-    id: string,
-    username: string,
-}
+    created: string,
+    updated: string,
 
-export type authContextType = {
-    user: User,
-    login: (auth: Record) => void,
-    logout: () => void
-}
-
-export type PocketBaseAccessoryResponse = {
-    page: number,
-    petPage: number,
-    totalItems: number,
-    totalPages: number,
-    items: Array<Accessory>
-}
-
-export type PocketBaseFishResponse = {
-    page: number,
-    petPage: number,
-    totalItems: number,
-    totalPages: number,
-    items: Array<FishResponse>
-}
-
-export type User = {
-    avatarUrl: string,
-    collectionId: string,
-    collectionName: string,
-    email: string,
-    id: string,
     name: string,
+    owner: string,
+    accessories: string[],
+    fishes: string[]
+}
+
+export type User = {
+    id: string,
+    collectionId: string,
+    collectionName: string,
+
+    avatarUrl: string,
+    email: string,
     username: string,
 }
 
-export type authContextType = {
-    user: User,
-    login: (auth: Record) => void,
-    logout: () => void
-}
-
-export type Props = {
-    children: ReactNode
-}
+export type FishOrAccessory = "Fish" | "Accessory"

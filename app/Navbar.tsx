@@ -4,7 +4,6 @@ import React from 'react'
 import Link from 'next/link';
 import { usePocket } from "@/app/AuthContext";
 import { Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react"
-import { redirect } from 'next/dist/server/api-utils';
 import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
@@ -35,8 +34,6 @@ export default function Navbar() {
     if (user) {
         rightNavBar = (
             <div>
-                {/* <Link href={`/profile/${user.id}`} className="px-4">Profil</Link>
-                <Link href="/" className="px-4" onClick={logout}>Wyloguj</Link> */}
                 <Dropdown>
                     <DropdownTrigger>
                         <Avatar src={`http://127.0.0.1:8090/api/files/${user?.collectionId}/${user?.id}/${user?.avatar}`}/>
@@ -56,7 +53,7 @@ export default function Navbar() {
 
     return (
         <nav
-            className="sticky z-10 flex items-center justify-between p-4 bg-blue-600 text-lg w-screen drop-shadow-[0_5px_5px_rgba(0,0,0,0.2)]">
+            className="sticky z-10 flex items-center justify-between p-4 bg-blue-600 text-lg w-screen drop-shadow-lg">
             <div className="flex items-center">
                 <Link href="/" className="px-4">Strona Główna</Link>
                 <Link href="/katalog_ryb" className="px-4">Katalog Ryb</Link>

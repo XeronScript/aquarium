@@ -1,8 +1,12 @@
+'use client'
+
 import React from "react";
-import {PacmanLoader} from "react-spinners";
+import {CircularProgress} from "@nextui-org/react";
 
 export default function Loading() {
     return (
-        <PacmanLoader color="#36d7b7" />
+        <div className="h-screen flex justify-center items-center">
+            <CircularProgress size="lg" aria-label="Ładowanie..." />
+        </div>
     )
 }

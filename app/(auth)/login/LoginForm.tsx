@@ -3,6 +3,7 @@
 import { usePocket } from '@/app/AuthContext'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import {CircularProgress} from "@nextui-org/react";
 
 function LoginForm() {
   const [ isLoading, setLoading ] = useState(false)
@@ -29,8 +30,8 @@ function LoginForm() {
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
     const { name, value } = e.target
+    console.log(name, value)
     setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: value
@@ -43,7 +44,6 @@ function LoginForm() {
     onSubmit={onSubmit}
     >
       <input 
-      value={formData.email}
       type="text" 
       placeholder='Email' 
       onChange={onChange}
@@ -51,7 +51,6 @@ function LoginForm() {
           h-10 text-black text-lg focus:outline-none'
       />
       <input 
-      value={formData.password}
       type="password" 
       placeholder='Password' 
       onChange={onChange}
@@ -63,7 +62,9 @@ function LoginForm() {
       className={`w-fit my-1 mt-2 py-2 px-3 rounded-lg bg-blue-600 text-lg
           hover:bg-red
           transition-all duration-300`}>
-          {isLoading ? "Loading..." : "Login"}
+          {isLoading ? 
+           <CircularProgress color="default" size="lg" aria-label="Ładowanie..." />
+           : "Login"}
       </button>
   </form>
   )

@@ -1,12 +1,11 @@
-import React, {Suspense} from "react";
+import React from "react";
 import FishCard from "./FishCard";
-import {PacmanLoader} from "react-spinners";
-import { FishResponse, PocketBaseFishResponse } from "@/typings";
+import { Fish } from "@/typings";
 
 
-async function getAllRecords(): Promise<PocketBaseFishResponse> {
+async function getAllRecords() {
     const res = await fetch(
-        'http://127.0.0.1:8090/api/collections/fishes/records?perPage=10',
+        'http://127.0.0.1:8090/api/collections/fishes/records?perPage=50',
         { cache: "no-cache" }
     )
 
@@ -18,15 +17,13 @@ async function getAllRecords(): Promise<PocketBaseFishResponse> {
 }
 
 export default async function FishCatalog() {
-    const fishArray: Array<FishResponse> = (await getAllRecords()).items
+    const fishArray: Array<Fish> = (await getAllRecords()).items
 
     return (
-        // <Suspense fallback={<PacmanLoader color="#36d7b7" />}>
-            <div className='flex flex-row flex-wrap min-h-screen w-screen py-16 items-center justify-center'>
-                {fishArray?.map((fish: FishResponse) => (
-                    <FishCard {...fish} key={fish.id}/>
-                ))}
-            </div>
-        // </Suspense>
+        <div className='flex flex-row flex-wrap min-h-screen w-screen py-16 items-center justify-center'>
+            {fishArray?.map((fish: Fish) => (
+                <FishCard {...fish} key={fish.id}/>
+            ))}
+        </div>
     );
 }

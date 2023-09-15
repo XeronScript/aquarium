@@ -1,10 +1,12 @@
-import React from "react";
+'use client'
 
+import React from "react";
+import {CircularProgress} from "@nextui-org/react";
 
 export default function Loading() {
     return (
-        <div className="absolute top-0 bottom-0 left-0 right-0">
-            Loading...
+        <div className="h-screen flex justify-center items-center">
+            <CircularProgress size="lg" aria-label="Ładowanie..." />
         </div>
     );
 };

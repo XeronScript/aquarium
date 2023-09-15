@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import { FishResponse } from "@/typings";
+import { Fish } from "@/typings";
 
-export default function FishCard(props: FishResponse) {
+export default function FishCard(props: Fish) {
     return (
         <div className="flex flex-col items-center overflow-clip
         m-10 max-w-2xl rounded-lg bg-white text-black text-sm drop-shadow-lg">
