@@ -71,7 +71,7 @@ function AddAquariumPage(props: any) {
             value="Dodaj"
             className='text-slate-100 p-2 bg-sky-700 rounded-md outline-none drop-shadow-md
             hover:bg-sky-500 active:bg-sky-600 active:drop-shadow-none transition-all duration-100'
-            />
+        />
         </form>
     </div>
   )

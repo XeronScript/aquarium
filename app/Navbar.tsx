@@ -36,7 +36,10 @@ export default function Navbar() {
             <div>
                 <Dropdown>
                     <DropdownTrigger>
-                        <Avatar src={`http://127.0.0.1:8090/api/files/${user?.collectionId}/${user?.id}/${user?.avatar}`}/>
+                        <Avatar 
+                            showFallback
+                            src={`http://127.0.0.1:8090/api/files/${user?.collectionId}/${user?.id}/${user?.avatar}`}
+                        />
                     </DropdownTrigger>
                     <DropdownMenu
                         onAction={(key) => redirect(key)}

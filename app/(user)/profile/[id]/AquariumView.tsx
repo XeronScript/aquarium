@@ -1,11 +1,11 @@
 import { Aquarium } from '@/typings'
-import React, { useEffect } from 'react'
+import React from 'react'
 import AquariumCard from './AquariumCard'
 import AddAquariumCard from './AddAquariumCard'
 
 
-const fetchAquariums = async () => {
-    const res = await fetch('http://127.0.0.1:8090/api/collections/aquariums/records', {
+const fetchAquariums = async (id: string) => {
+    const res = await fetch(`http://127.0.0.1:8090/api/collections/aquariums/records?filter=(owner='${id}')`, {
         cache: "no-cache",
         next: {
             tags: ["aquariums"]
@@ -14,10 +14,10 @@ const fetchAquariums = async () => {
     return res.json()
 }
 
-async function AquariumView() {
+async function AquariumView(props: any) {
     const aquariums: Aquarium[] = []
 
-    const res = await fetchAquariums()
+    const res = await fetchAquariums(props.userId)
     res.items.map((item: Aquarium) => {
         aquariums.push({...item})
     })

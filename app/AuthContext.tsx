@@ -12,6 +12,26 @@ import PocketBase from "pocketbase"
 import { useInterval } from "usehooks-ts"
 import jwtDecode, { JwtPayload } from "jwt-decode"
 import ms from "ms"
+import { User } from "@/typings"
+
+interface Props {
+    children: React.ReactNode
+}
+
+type ResponseType =
+    | "Success"
+    | "Invalid Email"
+    | "Blank Password"
+    | "Wrong Password Lenght"
+    | "Not Matching Password Confirm"
+    | "Existing Username"
+    | undefined
+
+interface RegisterResponse {
+    type: ResponseType,
+    data: any
+}
+
 
 
 const BASE_URL = "http://127.0.0.1:8090"
@@ -21,11 +41,6 @@ const twoMinutes = ms("2 minutes")
 const PocketContext = createContext({})
 
 export const usePocket = () => useContext(PocketContext) as any
-
-
-interface Props {
-    children: React.ReactNode
-}
 
 export function PocketProvider({ children }: Props) {
     const pb = useMemo(() => new PocketBase(BASE_URL), [])
@@ -40,16 +55,58 @@ export function PocketProvider({ children }: Props) {
         })
     }, [])
 
-    const register = useCallback(async (email: string, password: string) => {
-        const id = Math.floor(Math.random() * 99999)
+    const register = useCallback( async (
+            name: string,
+            email: string,
+            password: string,
+            passwordConfirm: string
+        ): Promise<RegisterResponse | undefined> => {
         const data = {
-            "username": `User${id}`,
+            "username": name,
             "email": email,
             "emailVisibitility": true,
             "password": password,
-            "passwordConfirm": password,
+            "passwordConfirm": passwordConfirm,
         }
-        return await pb.collection("users").create(data)
+
+        try {
+            const res = await pb.collection("users").create(data)
+            return {
+                type: "Success",
+                data: res
+            }
+        } catch (e: any) {
+            const err = e.data.data
+            if (err.hasOwnProperty("email")) {
+                return {
+                    type: "Invalid Email",
+                    data: null
+                }
+            } else if (err.hasOwnProperty("password")) {
+                if (err.password.code === 'validation_length_out_of_range') {
+                    return {
+                        type: "Wrong Password Lenght",
+                        data: null
+                    }
+                }
+                return {
+                    type: "Blank Password",
+                    data: null
+                }
+            } else if (err.hasOwnProperty("passwordConfirm")) {
+                return {
+                    type: "Not Matching Password Confirm",
+                    data: null
+                }
+            } else if (err.hasOwnProperty("username")) {
+                return {
+                    type: "Existing Username",
+                    data: null
+                }
+            } else {
+                return undefined
+            }
+        }
     }, [])
 
     const login = useCallback(async (email: string, password: string) => {
