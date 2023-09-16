@@ -22,14 +22,16 @@ export default function Navbar() {
                 router.push('/addAccessory')
                 break;
             case 'logout':
-                logout()
                 router.push('/')
+                logout()
                 break;
         }
     }
 
     let rightNavBar = (
-        <Link href="/login" className="px-4">Zaloguj</Link>
+        <div>
+            <Link href="/login" className="px-4">Zaloguj</Link>
+        </div>
     )
     if (user) {
         rightNavBar = (
@@ -55,7 +57,7 @@ export default function Navbar() {
     }
 
     return (
-        <nav
+        <nav suppressHydrationWarning
             className="sticky z-10 flex items-center justify-between p-4 bg-blue-600 text-lg w-screen drop-shadow-lg">
             <div className="flex items-center">
                 <Link href="/" className="px-4">Strona Główna</Link>

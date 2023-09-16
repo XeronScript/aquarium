@@ -133,7 +133,7 @@ function AddFishPage() {
             type="text"
             name="water_ph"
             onChange={onChange}
-            placeholder='Parametry wody'
+            placeholder='Ph wody'
             className="border-2 border-slate-300 focus:ring-2 focus:ring-sky-700 outline-none rounded-md p-2
             text-slate-800"
             />
@@ -141,7 +141,7 @@ function AddFishPage() {
             type="text"
             name="water_toughness"
             onChange={onChange}
-            placeholder='Parametry wody'
+            placeholder='Twardość wody'
             className="border-2 border-slate-300 focus:ring-2 focus:ring-sky-700 outline-none rounded-md p-2
             text-slate-800"
             />

@@ -29,7 +29,7 @@ function AquariumCard(props: Aquarium) {
         </CardBody>
         <Divider />
         <CardFooter>
-            <Link href={`profile/${user.id}/${props.id}`} className='text-sm text-blue-500'>
+            <Link href={`/profile/${user?.id}/${props.id}`} className='text-sm text-blue-500'>
                 Zobacz więcej
             </Link>
         </CardFooter>

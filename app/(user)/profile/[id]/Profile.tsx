@@ -11,9 +11,9 @@ function Profile() {
     const router = useRouter()
     const [ avatar, setAvatar ] = useState<string | StaticImageData>(`http://127.0.0.1:8090/api/files/${user?.collectionId}/${user?.id}/${user?.avatar}`)
 
-    if (user === null) {
-        router.push("/")
-    }
+    // if (user === null) {
+    //     router.push("/")
+    // }
 
     const changeAvatar = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       setAvatar(Avatar)
